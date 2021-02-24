@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# The CLI
+
+require_relative '../config/enviornment'
+
+Plant_Assistant.new.run
