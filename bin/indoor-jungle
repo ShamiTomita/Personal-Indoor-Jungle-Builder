@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+
 # The CLI
 
-require_relative '../config/enviornment'
-
-Plant_Assistant.new.run
+require "bundler/setup"
+require "lib/indoor_jungle"
+IndoorJungle::Plant_Assistant.new.run

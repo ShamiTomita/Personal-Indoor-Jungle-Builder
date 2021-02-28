@@ -1,14 +1,9 @@
-#!/usr/bin/env ruby
 
-require 'open-uri'
-require 'nokogiri'
-require 'pry'
-site = 'https://www.plants.com/c/all-plants'
 #Scraper.scrape_site('https://www.plants.com/c/all-plants')
 #Scraper.scrape_plant('https://www.plants.com/p/snake-plant-157646?c=all-plants')
-class Scraper
+class IndoorJungle::Scraper
   def self.scrape_site(site)
-    page = Nokogiri::HTML(open(site))
+    page = Nokogiri::HTML(URI.open(site))
     plants_lumped = []
     page.css('div.product-item').each do |plants|
       plants_lumped << {
@@ -20,15 +15,16 @@ class Scraper
       plants_lumped
   end
 
+##here lies my mess
   def self.scrape_plant(plant_url)
-    page = Nokogiri::HTML(open(plant_url))
+    page = Nokogiri::HTML(URI.open(plant_url))
     plant = {}
-    page.css('div.instruction-note.row').each do |element|
-      plant[:sunlight] = element.css('div.image-card p')[0].text,
+    element = page.css('div.product-layout-')
+      plant[:sunlight] = element.css('p.condition-text.mb-0').first.text,
       plant[:water] = element.css('div.image-card p')[1].text,
-      plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0 F")
-    end
-    plant
+      plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0F"),
+
+      plant #currently this whole hash is being applied to sunlight
   end
 
 end

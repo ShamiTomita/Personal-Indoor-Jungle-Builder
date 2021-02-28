@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
-
+require "bundler/setup"
+require "./lib/indoor_jungle.rb"
 require 'irb'
 
-def reload!
-  load_all './lib'
-end
-
-require_relative '../config/enviornment'
 puts "Welcome to your console"
 
 IRB.start
