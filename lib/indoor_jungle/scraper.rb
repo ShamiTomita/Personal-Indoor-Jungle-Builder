@@ -22,8 +22,7 @@ class IndoorJungle::Scraper
     element = page.css('div.product-layout-')
       plant[:sunlight] = element.css('p.condition-text.mb-0').first.text,
       plant[:water] = element.css('div.image-card p')[1].text,
-      plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0F"),
-
+      plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0F")
       plant #currently this whole hash is being applied to sunlight
   end
 
