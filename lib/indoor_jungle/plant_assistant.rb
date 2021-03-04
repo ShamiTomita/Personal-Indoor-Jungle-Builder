@@ -22,11 +22,48 @@ BASE_PATH = "https://www.plants.com/c/all-plants"
 
   def call
     #cold, low_light, low_maintenance
+    temp = nil
+    light = nil
+    attention = nil
     puts "Welcome to you Personal Indoor Jungle Builder!!!"
+    puts "To get started, we need to get some more information about you"
+
+    puts "Would you describe your home temperature to as: cool(around 60F), room temp(around 70F), or warm? (above 80F)"
+    temp_input = gets.chomp
+    if temp_input == "cool"
+      temp = @@cold
+    elsif temp_input == "room temp"
+      temp = @@room_temp
+    elsif  temp_input == "warm"
+      temp = @@warm
+    end
+
+    puts "Would you describe the light sources in your home as: low light, medium light, or bright?"
+    light_input = gets.chomp
+    if light_input == "low light" ||light_input == "low"
+      light = @@low_light
+    elsif light_input == "medium light" || light_input == "medium"
+      light = @@medium_light
+    elsif light_input == "bright light" || light_input == "bright"
+      light = @@high_light
+    end
+
+    puts "Finally, would you describe your attention to plant care as: relaxed, average, or vigilant?"
+    attention_input = gets.chomp
+    puts "Thank you, based on your input your ideal plant matches are:"
     #input = gets
+    if attention_input == "relaxed"
+      attention = @@low_maintenance
+    elsif attention_input == "average"
+      attention = @@medium_maintenance
+    elsif attention_input == "vigilant"
+      attention = @@high_maintenance
+    end
+
+
     IndoorJungle::Plant.all.select do |plant|
-      if @@cold.include?(plant) && @@high_light.include?(plant) && @@high_maintenance.include?(plant)
-        puts plant.name
+      if temp.include?(plant) && light.include?(plant) && attention.include?(plant)
+        display_plant(plant)
       end
     end
   end
@@ -44,7 +81,18 @@ BASE_PATH = "https://www.plants.com/c/all-plants"
     end
   end
 
-  def self.display_plant
+  def display_plant(plant)
+    puts "-----------------------".green
+    puts "Plant Name: #{plant.name}".light_green
+    puts "#{plant.price_range}".magenta
+    puts "Sunlight: #{plant.sunlight[0]}."
+    puts "Water: #{plant.water}."
+    puts "Temperature: " + "#{plant.temperature}.".capitalize
+    puts "#{plant.plant_url}"
+    puts "-----------------------".green
+  end
+
+  def self.display_plants
       puts "-----------------------".green
     IndoorJungle::Plant.all.each do |plant|
       puts "Plant Name: #{plant.name}".light_green
