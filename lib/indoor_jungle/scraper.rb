@@ -5,9 +5,9 @@ class IndoorJungle::Scraper
   def self.scrape_site(site)
     page = Nokogiri::HTML(URI.open(site))
     plants_lumped = []
-    page.css('div.product-item').each do |plants|
+    page.css('div.ProductList_productItem__HxDc2').each do |plants|
       plants_lumped << {
-        :name => plants.css('span.title').text,
+        :name => plants.css('div.col-12').text,
         :price_range => plants.css("a span").children[1].text,
         :plant_url => "https://www.plants.com" + (plants.css("a")[0].attributes["href"].value)
       }

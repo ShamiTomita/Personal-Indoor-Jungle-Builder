@@ -3,5 +3,5 @@
 # The CLI
 
 require "bundler/setup"
-require "lib/indoor_jungle"
-IndoorJungle::Plant_Assistant.new.run
+require "./lib/indoor_jungle.rb"
+IndoorJungle::PlantAssistant.new.call

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require "bundler/setup"
+require "gemoji"
 require "./lib/indoor_jungle.rb"
 require 'irb'
 
