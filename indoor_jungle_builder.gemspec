@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'indoor_jungle/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "personal_indoor_jungle_builder"
+  spec.name          = "indoor_jungle_builder"
   spec.version       = IndoorJungle::Version
   spec.authors       = ["shamitomita"]
   spec.email         = ["shamitomita@gmail.com.com"]
