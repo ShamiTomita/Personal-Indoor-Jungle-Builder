@@ -46,17 +46,17 @@ class IndoorJungle::PlantAssistant
 
     puts "To get started, we need to get some more information about you"
     sleep(1)
-    puts "Would you describe your home temperature to as: cool(around 60F), room temp(around 70F), or warm? (around or above 80F)"
+    puts "Would you describe your home temperature as: cool(around 60F), room temp(around 70F), or warm? (around or above 80F)"
 
-    until temp_input == "cool" || temp_input == "cold" || temp_input == "colder" || temp_input == "room temp" || temp_input == "room" || temp_input == "average" || temp_input == "warm" || temp_input == "tropical" || temp_input == "hot"
+    until temp_input == "cool" || temp_input == "cold" || temp_input == "colder" || temp_input == "room temp" || temp_input == "room" || temp_input == "average" || temp_input == "warm" || temp_input == "tropical" || temp_input == "hot" || temp_input == "60F" || temp_input == "70F" || temp_input == "80F"
       temp_input = gets.chomp
     end
 
-    if temp_input == "cool" || temp_input == "cold" || temp_input == "colder"
+    if temp_input == "cool" || temp_input == "cold" || temp_input == "colder" || temp_input == "60F"
       temp = @@cold
-    elsif temp_input == "room temp" || temp_input == "room" || temp_input == "average"
+    elsif temp_input == "room temp" || temp_input == "room" || temp_input == "average" || temp_input == "70F"
       temp = @@room_temp
-    elsif  temp_input == "warm" || temp_input == "hot" || temp_input == "tropical"
+    elsif  temp_input == "warm" || temp_input == "hot" || temp_input == "tropical" || temp_input == "80F"
       temp = @@warm
     end
 
@@ -94,13 +94,13 @@ class IndoorJungle::PlantAssistant
       end
     end
 
-    puts "Thank you for your input! Based on your responses, your ideal plant matches are: "
-    sleep(2)
-    puts "-----------------------".green
-    plants.each do |x|
+
       if plants.empty?
         puts "I'm sorry but your answers did not result in a match."
       else
+        puts "Thank you for your input! Based on your responses, your ideal plant matches are: "
+        plants.each do |x|
+        sleep(2)
       display_plant(x)
       sleep(2.5)
       end
@@ -117,6 +117,8 @@ class IndoorJungle::PlantAssistant
     elsif input_2 == "list" || input_2 == "list of plants" || input_2 == "plants"
       display_plants
     else
+      puts "-----------------------".green
+      sleep(1)
       puts "Thank you for using your Indoor Jungle Builder!"
       puts "Please Like & Subscribe"
       sleep(3)
@@ -129,7 +131,7 @@ class IndoorJungle::PlantAssistant
     puts "Sunlight: #{plant.sunlight[0]}."
     puts "Water: #{plant.water}."
     puts "Temperature: " + "#{plant.temperature}.".capitalize
-    puts "#{plant.plant_url}"
+    puts "URL: #{plant.plant_url}"
     puts "-----------------------".green
   end
 
@@ -149,7 +151,8 @@ class IndoorJungle::PlantAssistant
       call
     elsif input_2 == "list" || input_2 == "list of plants" || input_2 == "plants"
       display_plants
-    else "Thank you for using your Indoor Jungle Builder!"
+    else
+      puts "Thank you for using your Indoor Jungle Builder!"
       exit
     end
   end

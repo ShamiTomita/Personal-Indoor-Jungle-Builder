@@ -4,6 +4,8 @@
 
 require "bundler/setup"
 require "./lib/indoor_jungle.rb"
-
+puts "-----------------------------------------".green
 puts "Welcome to your Indoor Jungle Builder!!!"
+puts "-----------------------------------------".green
+puts "One moment as your Plant Assistant is loaded."
 IndoorJungle::PlantAssistant.new.call
