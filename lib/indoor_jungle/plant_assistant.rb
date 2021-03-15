@@ -99,6 +99,7 @@ class IndoorJungle::PlantAssistant
         puts "I'm sorry but your answers did not result in a match."
       else
         puts "Thank you for your input! Based on your responses, your ideal plant matches are: "
+        puts "-----------------------".green
         plants.each do |x|
         sleep(2)
       display_plant(x)
@@ -128,7 +129,7 @@ class IndoorJungle::PlantAssistant
 
   def display_plant(plant)
     puts "Plant Name: #{plant.name}".light_green
-    puts "Sunlight: #{plant.sunlight[0]}."
+    puts "Sunlight: #{plant.sunlight}."
     puts "Water: #{plant.water}."
     puts "Temperature: " + "#{plant.temperature}.".capitalize
     puts "URL: #{plant.plant_url}"
@@ -139,7 +140,7 @@ class IndoorJungle::PlantAssistant
     IndoorJungle::Plant.all.each do |plant|
       puts "Plant Name: #{plant.name}".light_green
       puts "#{plant.price_range}".magenta
-      puts "Sunlight: #{plant.sunlight[0]}."
+      puts "Sunlight: #{plant.sunlight}."
       puts "Water: #{plant.water}."
       puts "Temperature: " + "#{plant.temperature}.".capitalize
       puts "#{plant.plant_url}"

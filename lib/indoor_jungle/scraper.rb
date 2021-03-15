@@ -5,6 +5,7 @@ class IndoorJungle::Scraper
   def self.scrape_site(site)
     page = Nokogiri::HTML(URI.open(site))
     plants_lumped = []
+
     page.css('div.ProductList_productItem__HxDc2').each do |plants|
       plants_lumped << {
         :name => plants.css('div.col-12').text,
@@ -20,10 +21,16 @@ class IndoorJungle::Scraper
     page = Nokogiri::HTML(URI.open(plant_url))
     plant = {}
     element = page.css('div.product-layout-')
-      plant[:sunlight] = element.css('p.condition-text.mb-0').first.text,
-      plant[:water] = element.css('div.image-card p')[1].text,
+      if element.css('p.condition-text.mb-0').empty?
+        plant[:sunlight] = ["nope", "nah", "oops"]
+        plant[:water] = "nah"
+        plant[:temperature] = "ooops"
+        plant
+      else
+      plant[:sunlight] = element.css('p.condition-text.mb-0').first.text
+      plant[:water] = element.css('div.image-card p')[1].text
       plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0F")
-      plant #currently this whole hash is being applied to sunlight
+      plant#currently this whole hash is being applied to sunlight
+    end
   end
-
 end
