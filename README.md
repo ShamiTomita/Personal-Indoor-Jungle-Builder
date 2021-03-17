@@ -9,6 +9,6 @@ and then execute: '$ bundle'
 Or install yourself as
 $ gem install indoor_jungle_builder
 
-#Usage
+# Usage
 To use your Personal Indoor Jungle Builder, type:
-$ bin/indoor-jungle 
+$ bin/indoor-jungle
