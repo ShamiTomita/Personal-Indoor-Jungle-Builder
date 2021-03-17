@@ -43,7 +43,7 @@ class IndoorJungle::PlantAssistant
     attention_input = nil
     input_2 = nil
 
-
+    #Program Begins, getting user input
     puts "To get started, we need to get some more information about you"
     sleep(1)
     puts "Would you describe your home temperature as: cool(around 60F), room temp(around 70F), or warm? (around or above 80F)"
@@ -88,25 +88,28 @@ class IndoorJungle::PlantAssistant
       attention = @@high_maintenance
     end
 
+    #Selecting plants based on Input
     IndoorJungle::Plant.all.each do |plant|
+
       if temp.include?(plant) && light.include?(plant) && attention.include?(plant)
         plants << plant
       end
     end
 
 
-      if plants.empty?
-        puts "I'm sorry but your answers did not result in a match."
-      else
-        puts "Thank you for your input! Based on your responses, your ideal plant matches are: "
-        puts "-----------------------".green
-        plants.each do |x|
-        sleep(2)
-      display_plant(x)
-      sleep(2.5)
+    if plants.empty?
+      puts "I'm sorry but your answers did not result in a match."
+    else
+      puts "Thank you for your input! Based on your responses, your ideal plant matches are: "
+      puts "-----------------------".green
+      plants.each do |x|
+        sleep(1)
+        display_plant(x)
+        sleep(1)
       end
     end
 
+    #Begin Program loop
     puts "Would you like to 'redo' your ansers or see the full 'list of plants'? Or 'exit'? "
 
     until input_2 == "redo" || input_2 == "try again" || input_2 == "list" || input_2 == "list of plants" || input_2 == "plants" || input_2 == "exit" || input_2 == "Exit"
@@ -122,7 +125,7 @@ class IndoorJungle::PlantAssistant
       sleep(1)
       puts "Thank you for using your Indoor Jungle Builder!"
       puts "Please Like & Subscribe"
-      sleep(3)
+      sleep(2)
       exit
     end
   end
@@ -139,7 +142,6 @@ class IndoorJungle::PlantAssistant
   def display_plants
     IndoorJungle::Plant.all.each do |plant|
       puts "Plant Name: #{plant.name}".light_green
-      puts "#{plant.price_range}".magenta
       puts "Sunlight: #{plant.sunlight}."
       puts "Water: #{plant.water}."
       puts "Temperature: " + "#{plant.temperature}.".capitalize
@@ -174,13 +176,13 @@ class IndoorJungle::PlantAssistant
     #====> plant instances can be in all three
     sorted_plants = self.library
     sorted_plants.each do |plant|
-      if plant.sunlight[0].include?("tolerate") || plant.sunlight[0].include?("handle") || plant.sunlight[0].include?("low") || plant.sunlight[0].include?("soft")
+      if plant.sunlight.include?("tolerate") || plant.sunlight.include?("handle") || plant.sunlight.include?("low") || plant.sunlight.include?("soft")
         @@low_light << plant
       end
-      if !plant.sunlight[0].include?("medium") || plant.sunlight[0].include?("bright")|| plant.sunlight[0].include?("sunny") || plant.sunlight[0].include?("full")
+      if !plant.sunlight.include?("medium") || plant.sunlight.include?("bright")|| plant.sunlight.include?("sunny") || plant.sunlight.include?("full")
         @@high_light << plant
       end
-      if !plant.sunlight[0].include?("Full") || !plant.sunlight[0].include?("sunny")
+      if !plant.sunlight.include?("Full") || !plant.sunlight.include?("sunny")
           @@medium_light << plant
       end
     end
@@ -259,7 +261,7 @@ class IndoorJungle::PlantAssistant
     puts "-----------------------".green
     @@low_light.each do |plant|
       puts plant.name
-      puts plant.sunlight[0]
+      puts plant.sunlight
       puts "-----------------------".green
     end
   end
@@ -268,7 +270,7 @@ class IndoorJungle::PlantAssistant
     puts "-----------------------".green
     @@medium_light.each do |plant|
       puts plant.name
-      puts plant.sunlight[0]
+      puts plant.sunlight
       puts "-----------------------".green
     end
   end
@@ -277,7 +279,7 @@ class IndoorJungle::PlantAssistant
     puts "-----------------------".green
     @@high_light.each do |plant|
       puts plant.name
-      puts plant.sunlight[0]
+      puts plant.sunlight
       puts "-----------------------".green
     end
   end

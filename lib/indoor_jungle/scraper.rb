@@ -16,7 +16,7 @@ class IndoorJungle::Scraper
       plants_lumped
   end
 
-##here lies my mess
+
   def self.scrape_plant(plant_url)
     page = Nokogiri::HTML(URI.open(plant_url))
     plant = {}
@@ -30,7 +30,7 @@ class IndoorJungle::Scraper
       plant[:sunlight] = element.css('p.condition-text.mb-0').first.text
       plant[:water] = element.css('div.image-card p')[1].text
       plant[:temperature] = element.css('div.image-card p')[2].text.delete("\u00B0F")
-      plant#currently this whole hash is being applied to sunlight
+      plant 
     end
   end
 end
